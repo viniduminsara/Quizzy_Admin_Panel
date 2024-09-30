@@ -7,7 +7,7 @@ const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className={`bg-white ${isOpen ? "w-48 md:w-64" : "w-14"} duration-300 h-screen shadow-right_sm md:shadow-right_lg z-50`}>
+        <div className={`bg-white ${isOpen ? "w-48 md:w-64" : "w-14"} duration-300 min-h-screen shadow-right_sm md:shadow-right_lg z-50`}>
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="p-4 focus:outline-none"
