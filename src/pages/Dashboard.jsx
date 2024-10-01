@@ -15,7 +15,7 @@ const Dashboard = () => {
                 <div
                     className='bg-white p-6 flex flex-col md:flex-row justify-between items-center rounded-2xl shadow-md relative overflow-visible'>
                     <div className='z-10'>
-                        <h2 className='text-2xl poppins-medium'>Welcome Vinidu Minsara</h2>
+                        <h2 className='text-2xl poppins-medium'>Create Your own Quizzes</h2>
                         <h4 className='text-lg poppins-light mb-6'>Let{"'"}s check out quizzes</h4>
                         <Link to='/' className='bg-gradient text-white px-4 py-2 rounded-xl'>Visit Now</Link>
                     </div>
