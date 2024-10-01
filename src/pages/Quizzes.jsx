@@ -1,4 +1,5 @@
 import {BsThreeDotsVertical} from "react-icons/bs";
+import {Link} from "react-router-dom";
 
 const QuizzesTable = () => {
     const quizzes = [
@@ -8,19 +9,15 @@ const QuizzesTable = () => {
         { id: 3, name: 'History Quiz', questionsCount: 20, difficulty: 'Hard', attempts: 126 },
     ];
 
-    const handleCreateQuiz = () => {
-
-    };
-
     return (
         <div className="flex flex-col w-72 md:w-full h-full">
             <div className="flex justify-between items-center mb-4">
                 <h1 className="text-2xl poppins-semibold">Quizzes</h1>
-                <button
-                    onClick={handleCreateQuiz}
+                <Link
+                    to='new'
                     className="bg-gradient text-white px-4 py-2 rounded-xl">
                     Create New Quiz
-                </button>
+                </Link>
             </div>
             <div className="overflow-x-auto rounded-2xl shadow-lg w-full">
                 <table className="w-full bg-white border-b last:border-b-0">
