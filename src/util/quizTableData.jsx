@@ -3,15 +3,15 @@ import {BsThreeDotsVertical} from "react-icons/bs";
 const columns = [
     {
         name: 'Quiz Name',
-        selector: row => row.name,
+        selector: row => row.quizName,
         sortable: true,
-        cell: row => <span className='poppins-medium text-gray-900'>{row.name}</span>,
+        cell: row => <span className='poppins-medium text-gray-900'>{row.quizName}</span>,
     },
     {
         name: 'Questions Count',
-        selector: row => row.questionsCount,
+        selector: row => row.questions.length,
         sortable: true,
-        cell: row => <span className="poppins-medium">{row.questionsCount}</span>,
+        cell: row => <span className="poppins-medium">{row.questions.length}</span>,
     },
     {
         name: 'Difficulty',
@@ -41,8 +41,6 @@ const columns = [
         name: '',
         cell: row => <BsThreeDotsVertical size={18} />,
         ignoreRowClick: true,
-        allowOverflow: true,
-        button: true,
     },
 ];
 

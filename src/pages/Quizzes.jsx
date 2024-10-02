@@ -1,13 +1,29 @@
 import DataTable from 'react-data-table-component';
 import { Link } from "react-router-dom";
 import {quizTableData} from "../util/quizTableData.jsx";
+import {useEffect, useState} from "react";
+import {quizService} from "../service/quizService.js";
+import Loading from "../components/Loading.jsx";
 
 const QuizzesTable = () => {
-    const quizzes = [
-        { id: 1, name: 'Math Quiz', questionsCount: 10, difficulty: 'Easy', attempts: 541 },
-        { id: 2, name: 'Science Quiz', questionsCount: 15, difficulty: 'Medium', attempts: 325 },
-        { id: 3, name: 'History Quiz', questionsCount: 20, difficulty: 'Hard', attempts: 126 },
-    ];
+    const [quizzes, setQuizzes] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchQuizzes = async () => {
+            const quizzes = await quizService.getAllQuizzes();
+            if (quizzes !== null){
+                setQuizzes(quizzes);
+                setLoading(false);
+                console.log(quizzes)
+            }
+        }
+        fetchQuizzes();
+    }, []);
+
+    if (loading) {
+        return <Loading/>
+    }
 
     return (
         <div className="flex flex-col w-72 md:w-full h-full">

@@ -1,5 +1,5 @@
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs } from "firebase/firestore";
 import {db} from "../util/firebase.js";
 
 const saveQuiz = async (quizData) => {
@@ -19,6 +19,17 @@ const saveQuiz = async (quizData) => {
         questions: quizData.questions
     });
 
-}
+};
 
-export const quizService = { saveQuiz };
+const getAllQuizzes = async () => {
+    const querySnapshot = await getDocs(collection(db, "quiz"));
+
+    const quizData = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data()
+    }));
+
+    return quizData;
+};
+
+export const quizService = { saveQuiz, getAllQuizzes };
