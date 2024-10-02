@@ -1,4 +1,28 @@
+import { useCallback, useState } from "react";
+import { useDropzone } from "react-dropzone";
+
 const QuizDetailsForm = ({ quizData, setQuizData, handleImageUpload }) => {
+    const [imagePreview, setImagePreview] = useState(null); // State for image preview
+
+    const onDrop = useCallback((acceptedFiles) => {
+        if (acceptedFiles.length > 0) {
+            const file = acceptedFiles[0];
+            setQuizData({ ...quizData, image: file });
+            handleImageUpload({ target: { files: acceptedFiles } });
+
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagePreview(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    }, [quizData, setQuizData, handleImageUpload]);
+
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+        onDrop,
+        accept: "image/*",
+        multiple: false
+    });
 
     return (
         <div className="space-y-4 mb-4 lg:mb-0">
@@ -27,9 +51,11 @@ const QuizDetailsForm = ({ quizData, setQuizData, handleImageUpload }) => {
                 <label className="block poppins-regular font-medium mb-1">Difficulty</label>
                 <select
                     className="w-full border-2 p-2 rounded-xl poppins-regular"
+                    value={quizData.difficulty}
                     onChange={(e) => setQuizData({ ...quizData, difficulty: e.target.value })}
                     required
                 >
+                    <option value="">Select difficulty</option>
                     <option value="Easy">Easy</option>
                     <option value="Medium">Medium</option>
                     <option value="Hard">Hard</option>
@@ -38,13 +64,38 @@ const QuizDetailsForm = ({ quizData, setQuizData, handleImageUpload }) => {
 
             <div>
                 <label className="block poppins-regular font-medium mb-1">Quiz Image</label>
-                <input
-                    type="file"
-                    onChange={handleImageUpload}
-                    className="w-full border-2 p-2 rounded-xl poppins-regular"
-                    accept="image/*"
-                    required
-                />
+                <div
+                    {...getRootProps({
+                        className: `border-2 border-dashed p-4 rounded-xl cursor-pointer mb-4 ${
+                            isDragActive ? "bg-blue-100" : "bg-white"
+                        }`
+                    })}
+                >
+                    <input {...getInputProps()} />
+                    {isDragActive ? (
+                        <p className="text-center">Drop the image here...</p>
+                    ) : (
+                        <p className="text-center">
+                            Drag & drop an image here, or click to select one
+                        </p>
+                    )}
+                    {quizData.image && (
+                        <p className="mt-2 text-center">{quizData.image.name}</p>
+                    )}
+                </div>
+
+                {imagePreview && (
+                    <>
+                        <label className="block poppins-regular font-medium mb-1">Image Preview</label>
+                        <div className="mt-4">
+                            <img
+                                src={imagePreview}
+                                alt="Preview"
+                                className="mx-auto w-full h-64 object-contain border-2 rounded-xl"
+                            />
+                        </div>
+                    </>
+                )}
             </div>
         </div>
     );
