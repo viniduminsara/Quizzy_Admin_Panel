@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {sidebarNavLinksData} from "../../util/SidebarNavLinksData.jsx";
+import {sidebarNavLinksData} from "../../util/sidebarNavLinksData.jsx";
 import SidebarItem from "./SidebarItem.jsx";
 import {HiOutlineMenuAlt1} from "react-icons/hi";
 
