@@ -2,6 +2,7 @@ import { useState } from 'react';
 import {FaAngleDown, FaAngleUp} from "react-icons/fa6";
 import {toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import {quizService} from "../service/quizService.js";
 
 const NewQuiz = () => {
     const [quizData, setQuizData] = useState({
@@ -84,7 +85,13 @@ const NewQuiz = () => {
             return;
         }
 
-        console.log(quizData);
+        quizService.saveQuiz(quizData)
+            .then(() => {
+                toast.success('Quiz saved successfully!');
+            })
+            .catch((err) => {
+                toast.error(err.message);
+            })
     };
 
 
@@ -216,7 +223,6 @@ const NewQuiz = () => {
                         </div>
                     ))}
 
-                    {/* Add Question Button */}
                     {quizData.questions.length < 10 && (
                         <button
                             type="button"
