@@ -8,6 +8,17 @@ const columns = [
         cell: row => <span className='poppins-medium text-gray-900'>{row.quizName}</span>,
     },
     {
+        name: 'Image',
+        selector: row => row.imageUrl,
+        cell: row => <img src={row.imageUrl} className='w-24' alt='image'/>,
+    },
+    {
+        name: 'Description',
+        selector: row => row.description,
+        sortable: true,
+        cell: row => <span className='poppins-medium text-gray-900'>{row.description.slice(0, 40)}...</span>,
+    },
+    {
         name: 'Questions Count',
         selector: row => row.questions.length,
         sortable: true,
@@ -60,6 +71,8 @@ const customStyles = {
         style: {
             paddingLeft: '16px',
             paddingRight: '16px',
+            paddingTop: '10px',
+            paddingBottom: '10px',
             fontSize: '0.875rem',
         },
     },

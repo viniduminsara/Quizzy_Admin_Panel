@@ -4,6 +4,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { quizService } from "../service/quizService.js";
 import QuizDetailsForm from "../components/QuizForm/QuizDetailsForm.jsx";
 import QuestionForm from "../components/QuizForm/QuestionForm.jsx";
+import Loading from "../components/Loading.jsx";
+import {useNavigate} from "react-router-dom";
 
 const NewQuiz = () => {
     const [quizData, setQuizData] = useState({
@@ -14,6 +16,8 @@ const NewQuiz = () => {
         attempts: 0,
         questions: [{ questionText: '', answers: ['', '', '', ''], correctAnswer: 0, isCollapsed: true }]
     });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const navigate = useNavigate();
 
     const handleAddQuestion = () => {
         if (quizData.questions.length < 10) {
@@ -57,6 +61,7 @@ const NewQuiz = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setIsSubmitting(true);
 
         const errors = [];
         if (quizData.questions.length < 5) errors.push("Quiz must have at least 5 questions.");
@@ -79,9 +84,17 @@ const NewQuiz = () => {
         }
 
         quizService.saveQuiz(quizData)
-            .then(() => toast.success('Quiz saved successfully!'))
-            .catch((err) => toast.error(err.message));
+            .then(() => {
+                toast.success('Quiz saved successfully!');
+                navigate('/quizzes');
+            })
+            .catch((err) => toast.error(err.message))
+            .finally(() => setIsSubmitting(false));
     };
+
+    if (isSubmitting){
+        return <Loading/>
+    }
 
     return (
         <div>
