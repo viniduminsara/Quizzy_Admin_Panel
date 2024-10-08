@@ -4,7 +4,7 @@ import {FaRegTrashAlt} from "react-icons/fa";
 const QuestionForm = ({question, index, toggleCollapse, handleInputChange, handleCorrectAnswerChange, handleRemoveQuestion}) => {
 
     return (
-        <div className="border-2 py-2 px-4 mb-4 rounded-xl">
+        <div className="border-2 py-2 px-4 mb-4 rounded-xl duration-300">
             <div
                 className={`flex justify-between items-center ${question.isCollapsed ? '' : 'mb-4'}`}
                  onClick={() => toggleCollapse(index)}

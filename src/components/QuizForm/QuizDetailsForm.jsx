@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 const QuizDetailsForm = ({ quizData, setQuizData, handleImageUpload }) => {
-    const [imagePreview, setImagePreview] = useState(null); // State for image preview
+    const [imagePreview, setImagePreview] = useState(null);
 
     const onDrop = useCallback((acceptedFiles) => {
         if (acceptedFiles.length > 0) {
@@ -71,7 +71,7 @@ const QuizDetailsForm = ({ quizData, setQuizData, handleImageUpload }) => {
                         }`
                     })}
                 >
-                    <input {...getInputProps()} />
+                    <input {...getInputProps()}/>
                     {isDragActive ? (
                         <p className="text-center">Drop the image here...</p>
                     ) : (

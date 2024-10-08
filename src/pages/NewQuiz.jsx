@@ -78,8 +78,13 @@ const NewQuiz = () => {
             });
         });
 
+        if (!quizData.image) {
+            errors.push("Please upload an image.");
+        }
+
         if (errors.length > 0) {
             toast.error(errors[0]);
+            setIsSubmitting(false);
             return;
         }
 
