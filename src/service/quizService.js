@@ -1,6 +1,12 @@
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
+import {addDoc, collection, getDocs} from "firebase/firestore";
 import {db} from "../util/firebase.js";
+// const admin = require('firebase-admin');
+// const serviceAccount = require('service-account-key.json');
+//
+// admin.initializeApp({
+//     credential: admin.credential.cert(serviceAccount)
+// });
 
 const saveQuiz = async (quizData) => {
     const storage = getStorage();
@@ -32,4 +38,22 @@ const getAllQuizzes = async () => {
     return quizData;
 };
 
-export const quizService = { saveQuiz, getAllQuizzes };
+const getQuizCount = async () => {
+    const querySnapshot = await getDocs(collection(db, "quiz"));
+    return querySnapshot.size;
+};
+
+const getAllAttempts = async () => {
+    const querySnapshot = await getDocs(collection(db, "quiz"));
+
+    const totalAttempts = querySnapshot.docs.reduce((acc, doc) => {
+        const data = doc.data();
+        return acc + (data.attempts || 0);
+    }, 0);
+
+    return totalAttempts;
+};
+
+
+
+export const quizService = { saveQuiz, getAllQuizzes, getQuizCount, getAllAttempts };
