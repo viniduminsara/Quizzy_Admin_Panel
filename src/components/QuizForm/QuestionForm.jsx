@@ -1,13 +1,18 @@
 import {FaAngleDown, FaAngleUp} from "react-icons/fa6";
+import {FaRegTrashAlt} from "react-icons/fa";
 
 const QuestionForm = ({question, index, toggleCollapse, handleInputChange, handleCorrectAnswerChange, handleRemoveQuestion}) => {
+
     return (
         <div className="border-2 py-2 px-4 mb-4 rounded-xl">
-            <div className={`flex justify-between items-center ${question.isCollapsed ? '' : 'mb-4'}`}>
+            <div
+                className={`flex justify-between items-center ${question.isCollapsed ? '' : 'mb-4'}`}
+                 onClick={() => toggleCollapse(index)}
+            >
                 <label className="poppins-regular">Question {index + 1}</label>
-                <button type="button" onClick={() => toggleCollapse(index)}>
+                <div>
                     {question.isCollapsed ? <FaAngleDown size={20}/> : <FaAngleUp size={20}/>}
-                </button>
+                </div>
             </div>
 
             {!question.isCollapsed && (
@@ -57,9 +62,9 @@ const QuestionForm = ({question, index, toggleCollapse, handleInputChange, handl
                         <button
                             type="button"
                             onClick={() => handleRemoveQuestion(index)}
-                            className="text-red-500 text-sm p-2 border border-red-500 rounded-lg mb-2"
+                            className="p-2 bg-red-500 rounded-lg mb-2"
                         >
-                            Remove Question
+                            <FaRegTrashAlt size={18} color='white'/>
                         </button>
                     )}
                 </div>
