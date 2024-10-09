@@ -12,9 +12,9 @@ export const sidebarNavLinksData = [
         path: '/quizzes',
         icon: <MdQuiz size={24}/>
     },
-    {
-        name: 'Settings',
-        path: '/settings',
-        icon: <FaCog size={24}/>
-    },
+    // {
+    //     name: 'Settings',
+    //     path: '/settings',
+    //     icon: <FaCog size={24}/>
+    // },
 ];
