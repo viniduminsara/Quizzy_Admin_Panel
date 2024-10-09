@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard.jsx";
 import Quizzes from "./pages/Quizzes.jsx";
 import NewQuiz from "./pages/NewQuiz.jsx";
 import {ToastContainer} from "react-toastify";
+import EditQuiz from "./pages/EditQuiz.jsx";
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
                         <Route path='quizzes'>
                             <Route index={true} element={<Quizzes/>}/>
                             <Route path='new' element={<NewQuiz/>}/>
+                            <Route path=':quizId/edit' element={<EditQuiz/>}/>
                         </Route>
                     </Route>
                 </Routes>

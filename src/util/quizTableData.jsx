@@ -1,4 +1,7 @@
 import {BsThreeDotsVertical} from "react-icons/bs";
+import {AiTwotoneEdit} from "react-icons/ai";
+import {GoTrash} from "react-icons/go";
+import {Link} from "react-router-dom";
 
 const columns = [
     {
@@ -50,7 +53,16 @@ const columns = [
     },
     {
         name: '',
-        cell: row => <BsThreeDotsVertical size={18} />,
+        cell: row =>
+            <div className='flex w-32 justify-around'>
+                <Link to={`/quizzes/${row.id}/edit`} className='p-2 border rounded-xl shadow-xl'>
+                    <AiTwotoneEdit size={24} color='#f5a467'/>
+                </Link>
+                <button className='p-2 border rounded-xl shadow-xl'>
+                    <GoTrash size={24} color='#f56781'/>
+                </button>
+            </div>
+        ,
         ignoreRowClick: true,
     },
 ];

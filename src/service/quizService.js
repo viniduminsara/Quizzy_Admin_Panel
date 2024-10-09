@@ -1,12 +1,6 @@
 import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
-import {addDoc, collection, getDocs} from "firebase/firestore";
+import {addDoc, collection, getDocs, getDoc, doc} from "firebase/firestore";
 import {db} from "../util/firebase.js";
-// const admin = require('firebase-admin');
-// const serviceAccount = require('service-account-key.json');
-//
-// admin.initializeApp({
-//     credential: admin.credential.cert(serviceAccount)
-// });
 
 const saveQuiz = async (quizData) => {
     const storage = getStorage();
@@ -54,6 +48,17 @@ const getAllAttempts = async () => {
     return totalAttempts;
 };
 
+const getQuizById = async (quizId) => {
+    const quizDocRef = doc(db, "quiz", quizId);
+    const quizDoc = await getDoc(quizDocRef);
+
+    if (quizDoc.exists()) {
+        return { id: quizDoc.id, ...quizDoc.data() };
+    } else {
+        throw new Error("Quiz not found");
+    }
+};
 
 
-export const quizService = { saveQuiz, getAllQuizzes, getQuizCount, getAllAttempts };
+
+export const quizService = { saveQuiz, getAllQuizzes, getQuizCount, getAllAttempts, getQuizById };
