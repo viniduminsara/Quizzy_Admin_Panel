@@ -1,8 +1,14 @@
 import Header from "../components/Header.jsx";
-import {Outlet} from "react-router-dom";
+import {Navigate, Outlet} from "react-router-dom";
 import Sidebar from "../components/Sidebar/Sidebar.jsx";
+import {useAuth} from "../store/AuthContext.jsx";
 
 const RootLayout = () => {
+    const { currentUser } = useAuth();
+
+    if (!currentUser) {
+        return <Navigate to='/login' replace/>
+    }
 
     return (
         <div className='flex min-h-screen'>

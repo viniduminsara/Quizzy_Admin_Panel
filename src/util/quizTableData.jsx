@@ -1,7 +1,7 @@
 import {AiTwotoneEdit} from "react-icons/ai";
 import {GoTrash} from "react-icons/go";
 import {Link} from "react-router-dom";
-import ConfirmationModel from "../components/ConfirmationModel.jsx";
+import ConfirmationModel from "../components/Model/ConfirmationModel.jsx";
 
 const columns = [
     {

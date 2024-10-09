@@ -1,18 +1,14 @@
 import {GoTrash} from "react-icons/go";
 import {useState} from "react";
-import {quizService} from "../service/quizService.js";
+import {quizService} from "../../service/quizService.js";
 import {toast} from "react-toastify";
-import {updateTable} from "../pages/Quizzes.jsx";
 
 const ConfirmationModel = ({ quizId }) => {
     const [showModel, setShowModel] = useState(false);
 
     const handleConfirm = () => {
         quizService.deleteQuiz(quizId)
-            .then(() => {
-                toast.success('Quiz deleted successfully!');
-                updateTable(quizId);
-            })
+            .then(() => toast.success('Quiz deleted successfully!'))
             .catch((err) => toast.error(err.message))
             .finally(() => setShowModel(false));
     }
@@ -26,7 +22,7 @@ const ConfirmationModel = ({ quizId }) => {
                 <div
                     className='fixed top-0 left-0 w-full h-full px-4 bg-gray-500 bg-opacity-50 flex justify-center items-center z-10'>
                     <div className='bg-white rounded-lg p-4'>
-                        <h2 className='text-lg poppins-semibold mb-2'>Confirm Submission</h2>
+                        <h2 className='text-lg poppins-semibold mb-2'>Confirm Deletion</h2>
                         <p className='mb-4 poppins-regular'>Are you sure you want to delete quiz?</p>
                         <div className='flex justify-end space-x-2'>
                             <button
