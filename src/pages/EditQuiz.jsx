@@ -32,7 +32,6 @@ const EditQuiz = () => {
                 setQuizData({
                     quizName: data.quizName,
                     description: data.description,
-                    image: data.imageUrl,
                     difficulty: data.difficulty,
                     attempts: data.attempts,
                     questions: data.questions
@@ -119,7 +118,7 @@ const EditQuiz = () => {
             return;
         }
 
-        quizService.saveQuiz(quizData)
+        quizService.updateQuiz(quizId, quizData)
             .then(() => {
                 toast.success('Quiz saved successfully!');
                 navigate('/quizzes');

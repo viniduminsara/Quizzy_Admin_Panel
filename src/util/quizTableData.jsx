@@ -1,7 +1,7 @@
-import {BsThreeDotsVertical} from "react-icons/bs";
 import {AiTwotoneEdit} from "react-icons/ai";
 import {GoTrash} from "react-icons/go";
 import {Link} from "react-router-dom";
+import ConfirmationModel from "../components/ConfirmationModel.jsx";
 
 const columns = [
     {
@@ -58,9 +58,7 @@ const columns = [
                 <Link to={`/quizzes/${row.id}/edit`} className='p-2 border rounded-xl shadow-xl'>
                     <AiTwotoneEdit size={24} color='#f5a467'/>
                 </Link>
-                <button className='p-2 border rounded-xl shadow-xl'>
-                    <GoTrash size={24} color='#f56781'/>
-                </button>
+                <ConfirmationModel quizId={row.id}/>
             </div>
         ,
         ignoreRowClick: true,

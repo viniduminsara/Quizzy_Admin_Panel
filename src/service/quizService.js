@@ -1,5 +1,5 @@
 import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
-import {addDoc, collection, getDocs, getDoc, doc} from "firebase/firestore";
+import {addDoc, collection, getDocs, getDoc, doc, updateDoc, deleteDoc} from "firebase/firestore";
 import {db} from "../util/firebase.js";
 
 const saveQuiz = async (quizData) => {
@@ -59,6 +59,24 @@ const getQuizById = async (quizId) => {
     }
 };
 
+const updateQuiz = async (quizId, updatedData) => {
+    const quizDocRef = doc(db, "quiz", quizId);
 
+    if (updatedData.image) {
+        const storage = getStorage();
+        const storageRef = ref(storage, `quiz-images/${updatedData.image.name}`);
+        const snapshot = await uploadBytes(storageRef, updatedData.image);
+        const imageUrl = await getDownloadURL(snapshot.ref);
+        updatedData.imageUrl = imageUrl;
+        delete updatedData.image;
+    }
 
-export const quizService = { saveQuiz, getAllQuizzes, getQuizCount, getAllAttempts, getQuizById };
+    await updateDoc(quizDocRef, updatedData);
+};
+
+const deleteQuiz = async (quizId) => {
+    const quizDocRef = doc(db, "quiz", quizId);
+    await deleteDoc(quizDocRef);
+};
+
+export const quizService = { saveQuiz, getAllQuizzes, getQuizCount, getAllAttempts, getQuizById, updateQuiz, deleteQuiz };

@@ -4,8 +4,9 @@ import {quizTableData} from "../util/quizTableData.jsx";
 import {useEffect, useState} from "react";
 import {quizService} from "../service/quizService.js";
 import Loading from "../components/Loading.jsx";
+import {toast} from "react-toastify";
 
-const QuizzesTable = () => {
+const Quizzes = () => {
     const [quizzes, setQuizzes] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -14,11 +15,15 @@ const QuizzesTable = () => {
             const quizzes = await quizService.getAllQuizzes();
             if (quizzes !== null){
                 setQuizzes(quizzes);
-                setLoading(false);
-                console.log(quizzes)
             }
         }
-        fetchQuizzes();
+
+        fetchQuizzes()
+            .then(() => setLoading(false))
+            .catch((err) => {
+                setLoading(false);
+                toast.error(err.message);
+            })
     }, []);
 
     if (loading) {
@@ -47,4 +52,4 @@ const QuizzesTable = () => {
     );
 };
 
-export default QuizzesTable;
+export default Quizzes;
