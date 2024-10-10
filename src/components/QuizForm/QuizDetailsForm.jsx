@@ -84,7 +84,7 @@ const QuizDetailsForm = ({ quizData, setQuizData, handleImageUpload }) => {
                     )}
                 </div>
 
-                {imagePreview && (
+                {imagePreview ? (
                     <>
                         <label className="block poppins-regular font-medium mb-1">Image Preview</label>
                         <div className="mt-4">
@@ -95,7 +95,23 @@ const QuizDetailsForm = ({ quizData, setQuizData, handleImageUpload }) => {
                             />
                         </div>
                     </>
-                )}
+                )
+
+                :
+
+                    quizData.image && (
+                            <>
+                                <label className="block poppins-regular font-medium mb-1">Image</label>
+                                <div className="mt-4">
+                                    <img
+                                        src={quizData.image}
+                                        alt="Preview"
+                                        className="mx-auto w-full h-64 object-contain border-2 rounded-xl"
+                                    />
+                                </div>
+                            </>
+                        )
+                }
             </div>
         </div>
     );

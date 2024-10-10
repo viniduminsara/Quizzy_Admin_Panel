@@ -32,6 +32,7 @@ const EditQuiz = () => {
                 setQuizData({
                     quizName: data.quizName,
                     description: data.description,
+                    image: data.imageUrl,
                     difficulty: data.difficulty,
                     attempts: data.attempts,
                     questions: data.questions
