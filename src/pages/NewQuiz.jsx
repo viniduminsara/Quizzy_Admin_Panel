@@ -63,27 +63,29 @@ const NewQuiz = () => {
         event.preventDefault();
         setIsSubmitting(true);
 
-        const errors = [];
-        if (quizData.questions.length < 5) errors.push("Quiz must have at least 5 questions.");
-
-        quizData.questions.forEach((question, i) => {
-            if (question.questionText.trim() === '') {
-                errors.push(`Question ${i + 1} must have a question text.`);
+        try {
+            if (!quizData.image) {
+                throw new Error("Quiz must have an image.");
             }
 
-            question.answers.forEach((answer, j) => {
-                if (answer.trim() === '') {
-                    errors.push(`Question ${i + 1}, Answer ${j + 1} must not be empty.`);
+            if (quizData.questions.length < 5) {
+                throw new Error("Quiz must have at least 5 questions.");
+            }
+
+            quizData.questions.forEach((question, i) => {
+                if (question.questionText.trim() === '') {
+                    throw new Error(`Question ${i + 1} must have a question text.`);
                 }
+
+                question.answers.forEach((answer, j) => {
+                    if (answer.trim() === '') {
+                        throw new Error(`Question ${i + 1}, Answer ${j + 1} must not be empty.`);
+                    }
+                });
             });
-        });
 
-        if (!quizData.image) {
-            errors.push("Please upload an image.");
-        }
-
-        if (errors.length > 0) {
-            toast.error(errors[0]);
+        } catch (error) {
+            toast.error(error.message);
             setIsSubmitting(false);
             return;
         }
