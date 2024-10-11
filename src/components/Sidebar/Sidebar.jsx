@@ -4,13 +4,13 @@ import SidebarItem from "./SidebarItem.jsx";
 import {HiOutlineMenuAlt1} from "react-icons/hi";
 
 const Sidebar = () => {
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
 
     return (
         <div className={`bg-white ${isOpen ? "w-48 md:w-64" : "w-10 md:w-14"} duration-300 min-h-screen shadow-right_sm md:shadow-right_lg z-50`}>
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-4 hidden md:block focus:outline-none"
+                className="p-2 md:p-4 focus:outline-none"
             >
                 <HiOutlineMenuAlt1 size={28}/>
             </button>

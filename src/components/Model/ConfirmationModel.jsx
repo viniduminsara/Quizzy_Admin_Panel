@@ -20,7 +20,7 @@ const ConfirmationModel = ({ quizId }) => {
             </button>
             {showModel && (
                 <div
-                    className='fixed top-0 left-0 w-full h-full px-4 bg-gray-500 bg-opacity-50 flex justify-center items-center z-10'>
+                    className='fixed top-0 left-0 w-full h-full px-4 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50'>
                     <div className='bg-white rounded-lg p-4'>
                         <h2 className='text-lg poppins-semibold mb-2'>Confirm Deletion</h2>
                         <p className='mb-4 poppins-regular'>Are you sure you want to delete quiz?</p>

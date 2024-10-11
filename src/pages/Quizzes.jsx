@@ -31,16 +31,16 @@ const Quizzes = () => {
     }
 
     return (
-        <div className="flex flex-col w-72 md:w-full h-full">
+        <div className="flex flex-col w-full h-full">
             <div className="flex justify-between items-center mb-4">
-                <h1 className="text-2xl poppins-semibold">Quizzes</h1>
+                <h1 className="text-xl md:text-2xl poppins-semibold">Quizzes</h1>
                 <Link
                     to='new'
-                    className="bg-gradient text-white px-4 py-2 rounded-xl">
+                    className="bg-gradient text-white text-xs md:text-sm px-4 py-2 rounded-xl">
                     Create New Quiz
                 </Link>
             </div>
-            <div className="rounded-2xl shadow-lg w-full">
+            <div className="rounded-2xl shadow-lg w-72 md:w-full">
                 <DataTable
                     columns={quizTableData.columns}
                     data={quizzes}
